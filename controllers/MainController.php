@@ -37,7 +37,6 @@
 
 		function edit(){
 
-
 			$task = Task::find($_GET['id']);
 			$_REQUEST['car'] = $task;
 

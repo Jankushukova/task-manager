@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!$_SESSION['online']){
-    header("Location:/index?error=unauthorized");
+    header("Location:/?error=unauthorized");
 }
 $tasks = $_REQUEST['task_list']->data;
 $count = $_REQUEST['task_list']->count;

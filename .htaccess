@@ -3,5 +3,5 @@ Options -Indexes
     RewriteEngine on
 
     RewriteRule ^$   public/index.php   [L]
-    RewriteRule (.*) public/index.php?$1 [L]
+    RewriteRule (.*) public/index.php?$1 [L,QSA]
 </IfModule>
