@@ -94,7 +94,7 @@ class Task extends Model {
         try{
 
             $query = static::getConnection()->prepare(
-                "UPDATE tasks SET username = :username, email = :email, description = :description, status = :status WHERE id = :id"
+                "UPDATE tasks SET username = :username, email = :email, description = :description, status = :status, edited = :edited WHERE id = :id"
             );
 
             $query->execute(array(
@@ -103,6 +103,7 @@ class Task extends Model {
                 "description"=>$task['description'],
                 "id"=>$task['id'],
                 "status"=>$task['status'],
+                "edited"=>$task['edited'],
 
             ));
 

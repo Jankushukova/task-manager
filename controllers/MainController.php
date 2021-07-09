@@ -46,12 +46,10 @@
 
 
 		function save(){
-            $location = "/?error=404 Bad Request";
-
+            $location = "/dashboard?error=404 Bad Request";
             if (isset($_POST['id']) &&
                 isset($_POST['username']) &&
                 isset($_POST['email']) &&
-                isset($_POST['status']) &&
                 isset($_POST['description']))
             {
                 $task['id'] = $_POST['id'];
@@ -59,11 +57,12 @@
                 $task['email'] = $_POST['email'];
                 $task['status'] = isset($_POST['status']) ? '1' : '0';
                 $task['description'] = $_POST['description'];
+                $task['edited'] = $this->handleTextChanges($_POST['id'], $_POST['description']) ? 1 : 0;
                 Task::update($task);
-                $location = "/dashboard";
+                $location = "/dashboard?message=Record Successfully updated";
             }
 
-            header("Location:$location?message=Record Successfully updated");
+            header("Location:$location");
 		}
 
 		function dashboard(){
@@ -87,6 +86,12 @@
 		    session_start();
             unset($_SESSION['online']);
             header("Location:/");
+        }
+        function handleTextChanges($id, $text){
+            $task = Task::find($id);
+            print_r($task);
+            return ($task['description']!=$text) || ($task['edited']==1);
+
         }
 	}
 

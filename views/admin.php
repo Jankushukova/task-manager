@@ -7,6 +7,7 @@ $tasks = $_REQUEST['task_list']->data;
 $count = $_REQUEST['task_list']->count;
 $page = isset($_GET['page']) ? $_GET['page'] : 1;
 $message = isset($_GET['message']) ? $_GET['message'] : null;
+$error = isset($_GET['error']) ? $_GET['error'] : null;
 
 ?>
 
@@ -37,6 +38,10 @@ $message = isset($_GET['message']) ? $_GET['message'] : null;
 <div class="container">
     <div class="card  border-0">
         <div class="card-body">
+            <?php if ($error) {
+                echo " <div class='alert alert-danger' role='alert'>$error</div>";
+
+            }?>
             <?php if ($message) {
                 echo " <div class='alert alert-success' role='alert'>$message</div>";
 
@@ -66,7 +71,7 @@ $message = isset($_GET['message']) ? $_GET['message'] : null;
                 <td>".$task['username']. "</td>
                 <td>".$task['email']. "</td>
                 <td>".$task['description']. "</td>
-                <td>".(($task['status']==1)? 'Done' : 'Processing'). "</td>
+                <td>".(($task['status']==1)? 'Done' : 'Processing'). ($task['edited'] == 1 ? ', Edited by Admin' : '') . "</td>
                 <td><a href='/edit?id=" . $task['id'] . "' class='btn btn-warning' >Edit</a></td>
                 </tr>";
 
